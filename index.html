@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zou - Agricultural Investment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links">
+      <a href="#">Home</a>
+    </div>
+    <a href="#" class="signup-btn">Sign In</a>
+  </nav>
+
+  <!-- Weather Feed -->
+  <div class="weather-feed-container">
+    <div class="weather-marquee">
+      <span class="weather-text">Live weather feed from Ilorin • Temperature: 28°C • Humidity: 65% • Wind: 12 km/h •
+        Soil Moisture: 45%</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Smart Irrigation System</h1>
+    <div class="description">
+      <h2>The Smart Irrigation System uses IOT-Core microcontroller to optimize water usage, ensuring your plants get
+        the right amount of water—no more, no less. Especially for agriculture purposes, the system adapts to real-time
+        weather conditions, soil moisture levels, and environmental factors to deliver precision irrigation at its best.
+      </h2>
+    </div>
+
+    <!-- Reading Panels -->
+    <div class="reading-container">
+      <div class="reading-panel">
+        <h3>Predicted Reading</h3>
+        <div class="reading-item"><span>Temperature</span><span>28°C</span></div>
+        <div class="reading-item"><span>Pressure</span><span>1013 hPa</span></div>
+        <div class="reading-item"><span>Soil Moisture</span><span>45%</span></div>
+        <div class="reading-item"><span>Humidity</span><span>65%</span></div>
+      </div>
+
+      <div class="reading-panel">
+        <h3>Location Reading</h3>
+        <div class="reading-item"><span>Temperature</span><span>27°C</span></div>
+        <div class="reading-item"><span>Pressure</span><span>1012 hPa</span></div>
+        <div class="reading-item"><span>Soil Moisture</span><span>47%</span></div>
+        <div class="reading-item"><span>Humidity</span><span>63%</span></div>
+      </div>
+    </div>
+
+    <!-- Toggle Switch -->
+    <div class="toggle-container">
+      <span>Open Irrigation Water</span>
+      <label class="switch">
+        <input type="checkbox" id="investToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
