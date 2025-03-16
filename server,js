@@ -1,0 +1,47 @@
+require('dotenv').config();
+const express = require('express');
+const axios = require('axios');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Endpoint to receive sensor data
+app.post('/sensor-data', async (req, res) => {
+    const { temperature, humidity, soil_moisture } = req.body;
+
+    // Object to store processed sensor data
+    const sensorData = {
+        temperature: temperature !== undefined ? temperature : "Missing",
+        humidity: humidity !== undefined ? humidity : "Missing",
+        soil_moisture: soil_moisture !== undefined ? soil_moisture : "Missing"
+    };
+
+    console.log('Received Data:', sensorData);
+
+    // Send only available data (ignore "Missing" values) to the cloud
+    const dataToSend = {};
+    if (temperature !== undefined) dataToSend.temperature = temperature;
+    if (humidity !== undefined) dataToSend.humidity = humidity;
+    if (soil_moisture !== undefined) dataToSend.soil_moisture = soil_moisture;
+
+    try {
+        if (Object.keys(dataToSend).length > 0) {
+            const cloudResponse = await axios.post(process.env.CLOUD_SERVER_URL, dataToSend);
+            res.json({ message: 'Data sent to cloud successfully', received: sensorData, cloudResponse: cloudResponse.data });
+        } else {
+            res.json({ message: 'No valid sensor data to send', received: sensorData });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to send data to cloud', details: error.message, received: sensorData });
+    }
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
